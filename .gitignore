@@ -6,7 +6,7 @@ __pycache__/
 venv/
 
 build/_work/
-build/app.ico
+src/voicetext_ru/resources/app.ico
 dist/
 
 .vscode/

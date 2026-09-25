@@ -158,7 +158,9 @@ def build_ico(destination: Path) -> None:
 def main() -> int:
     QGuiApplication.setAttribute(Qt.ApplicationAttribute.AA_UseSoftwareOpenGL, True)
     app = QGuiApplication(sys.argv)  # QPainter требует инициализированного Qt
-    target = Path(__file__).resolve().parent / "app.ico"
+    # Иконка живёт внутри пакета (не в build/), чтобы её можно было найти
+    # через resource_path() и в исходниках, и в собранном приложении PyInstaller.
+    target = Path(__file__).resolve().parent.parent / "src" / "voicetext_ru" / "resources" / "app.ico"
     build_ico(target)
     print(f"Иконка создана: {target} ({target.stat().st_size} байт)")
     del app

@@ -13,11 +13,16 @@ from pathlib import Path
 from PyInstaller.utils.hooks import collect_all, collect_submodules
 
 PROJECT_ROOT = Path(SPECPATH).resolve().parent
-ICON_PATH = PROJECT_ROOT / "build" / "app.ico"
+ICON_PATH = PROJECT_ROOT / "src" / "voicetext_ru" / "resources" / "app.ico"
 
 binaries = []
 datas = []
 hiddenimports = []
+
+# Иконка нужна и в ресурсах exe (Проводник, Alt+Tab), и рядом с приложением,
+# чтобы код мог найти её через resource_path() и выставить как QWindow/QApplication icon.
+if ICON_PATH.is_file():
+    datas.append((str(ICON_PATH), "resources"))
 
 # Нативные библиотеки времени выполнения: движок вывода, аудио, декодеры.
 # collect_all забирает и DLL, и файлы данных (например, модель Silero VAD).

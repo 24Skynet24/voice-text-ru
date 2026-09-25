@@ -225,7 +225,7 @@ voicetext_ru/
 build/
 ├─ entrypoint.py      absolute-import entry for PyInstaller (see below)
 ├─ voicetext_ru.spec  PyInstaller recipe: native DLLs in, unused Qt modules out
-├─ make_icon.py       draws build/app.ico so no binary lives in the repository
+├─ make_icon.py       draws src/voicetext_ru/resources/app.ico so no binary lives in the repository
 ├─ installer.iss      Inno Setup script, per-user install, no admin rights
 └─ build.ps1          one command for the whole chain
 ```

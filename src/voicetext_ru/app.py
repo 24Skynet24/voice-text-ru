@@ -7,10 +7,12 @@ import logging
 import sys
 
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from . import APP_ID, APP_NAME, APP_VERSION
 from .logging_setup import install_excepthook, setup_logging
+from .paths import resource_path
 from .settings import Settings
 
 logger = logging.getLogger(__name__)
@@ -112,6 +114,12 @@ def main() -> int:
     app.setOrganizationName(APP_ID)
     # Запись не должна прерываться, когда пользователь закрывает диалоги (ТЗ §6).
     app.setQuitOnLastWindowClosed(True)
+
+    icon_path = resource_path("resources/app.ico")
+    if icon_path.is_file():
+        app.setWindowIcon(QIcon(str(icon_path)))
+    else:
+        logger.warning("Файл иконки не найден: %s", icon_path)
 
     settings = Settings.load()
 

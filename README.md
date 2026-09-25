@@ -38,9 +38,12 @@
 
 ## Установка (для пользователя)
 
-1. Скачайте и запустите `VoiceTextRU-1.0.0-setup.exe`.
-2. Запустите «Voice Text RU».
-3. При первом нажатии «Запись» программа скачает модель распознавания
+1. Откройте [страницу релизов](https://github.com/24Skynet24/voice-text-ru/releases/latest) и
+   скачайте `VoiceTextRU-<версия>-setup.exe` (или `VoiceTextRU-portable.zip`, если установка
+   не нужна — достаточно распаковать архив и запустить `Voice Text RU.exe` внутри).
+2. Запустите `VoiceTextRU-<версия>-setup.exe`.
+3. Запустите «Voice Text RU».
+4. При первом нажатии «Запись» программа скачает модель распознавания
    (по умолчанию около 2 ГБ: основная модель и быстрая модель для черновиков).
    Это происходит один раз; дальше приложение работает офлайн.
 
@@ -172,7 +175,7 @@ powershell -ExecutionPolicy Bypass -File build\build.ps1
 
 Скрипт выполняет три шага:
 
-1. `build\make_icon.py` — рисует `build\app.ico`;
+1. `build\make_icon.py` — рисует `src\voicetext_ru\resources\app.ico`;
 2. **PyInstaller** по файлу `build\voicetext_ru.spec` — собирает
    `dist\VoiceTextRU\Voice Text RU.exe` вместе со встроенным интерпретатором Python
    и всеми библиотеками;
@@ -192,6 +195,22 @@ powershell -ExecutionPolicy Bypass -File build\build.ps1 -SkipInstaller
 # сборка другим интерпретатором
 powershell -ExecutionPolicy Bypass -File build\build.ps1 -Python C:\Python312\python.exe
 ```
+
+### Выпуск релиза на GitHub
+
+Сборка и публикация установщика в GitHub Releases автоматизирована через
+[`.github/workflows/release.yml`](.github/workflows/release.yml). Чтобы выпустить релиз:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+По тегу вида `vX.Y.Z` Actions на Windows-раннере соберёт `Voice Text RU.exe`, установщик
+через Inno Setup и портативный `VoiceTextRU-portable.zip`, затем опубликует их как GitHub
+Release с этим тегом. Собрать без публикации (например, чтобы проверить сборку) можно
+вручную во вкладке **Actions → Release → Run workflow** — в этом случае релиз не
+создаётся, а собранные файлы можно скачать как artifact запуска.
 
 Модели распознавания **в сборку не входят**: они занимают гигабайты и скачиваются при первом
 запуске в профиль пользователя. Благодаря этому установщик остаётся небольшим, а обновление
