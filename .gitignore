@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+build/_work/
+build/app.ico
+dist/
+
+.vscode/
+.idea/
+
+*.log
+*.wav

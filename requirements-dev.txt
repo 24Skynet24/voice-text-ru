@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# Build / test tooling (not needed by end users of the packaged application)
+pyinstaller>=6.6
+pytest>=8.0
