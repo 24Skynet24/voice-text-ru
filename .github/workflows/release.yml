@@ -12,6 +12,12 @@ on:
 permissions:
   contents: write
 
+env:
+  # На раннере Windows stdout Python по умолчанию в cp1252, и print() с кириллицей
+  # (например, в build\make_icon.py) падает с UnicodeEncodeError.
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
 jobs:
   build:
     runs-on: windows-latest
